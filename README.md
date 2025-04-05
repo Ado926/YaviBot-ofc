@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=150&section=header&text=Bienvenidos%20-%20Sonic%20ProMax%20💛&fontSize=30&fontColor=FFFFFF&animation=fadeIn" width="100%"/> 
 
 ![Bienvenida Épica](https://github.com/WillZek/WillZek/blob/main/Crow.svg)
@@ -251,3 +252,6 @@ href="https://github.com/WillZek"><img src="https://github.com/WillZek.png" widt
 </details>
 
 > **[✎ P᥆ᥕᥱrᥱძ ᑲᥡ s𝗍ᥲrᥴ᥆rᥱ 𝗍ᥱᥲm ❀](https://whatsapp.com/channel/0029VaxkClI1NCrW4BX5rn3g)**
+=======
+# YaviBot-ofc
+>>>>>>> 8b3687888f88ae423cc65eff2b61956d827570e4
