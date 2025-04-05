@@ -1,0 +1,82 @@
+const handler = async (m, { conn, text, args, command }) => {
+  try {
+    // Si no hay texto ni argumento, envía el mensaje inicial
+    if (!text) {
+      await m.react('🎲');
+      
+      await conn.sendMessage(m.chat, {
+        text: '*🎲 JUEGO DE VERDAD O RETO 🎲*\n\nEscribe "verdad" si quieres una pregunta o "reto" si prefieres un desafío.',
+        footer: '¡Elige una opción para comenzar!',
+        viewOnce: true,
+      }, { quoted: m });
+
+      return; // Finaliza si no hay opción escrita
+    }
+
+    await m.react('✨'); // Reacción mientras procesa
+
+    // Definimos listas de preguntas y retos
+    const verdades = [
+      "¿Es verdad que has dicho una mentira muy grande?",
+      "¿Es verdad que tienes un crush secreto?",
+      "¿Es verdad que has roto el corazón de alguien?",
+      "¿Es verdad que has copiado en un examen?",
+      "¿Es verdad que te has enamorado de alguien imposible?",
+      "¿Es verdad que alguna vez te han rechazado en público?",
+      "¿Es verdad que te has enamorado por internet?",
+      "¿Es verdad que has hecho trampa en un juego?",
+    ];
+
+    const retos = [
+      "Te reto a enviar un audio diciendo 'te amo' al grupo.",
+      "Te reto a ponerte un filtro ridículo y mandar una foto.",
+      "Te reto a bailar durante 30 segundos y subir el video.",
+      "Te reto a escribir el nombre de tu crush con la nariz.",
+      "Te reto a mandar un sticker sin contexto.",
+      "Te reto a contar un secreto que nunca hayas dicho.",
+      "Te reto a cambiar tu nombre por 24 horas a 'Soy un crack'",
+      "Te reto a cantar tu canción favorita sin música.",
+    ];
+
+    // Limpia y convierte a minúsculas el texto recibido
+    const opcion = text.trim().toLowerCase();
+
+    let resultado = '';
+
+    // Elige qué hacer según la opción
+    if (opcion === 'verdad') {
+      resultado = verdades[Math.floor(Math.random() * verdades.length)];
+      await m.react('🗣️');
+    } else if (opcion === 'reto') {
+      resultado = retos[Math.floor(Math.random() * retos.length)];
+      await m.react('💪');
+    } else {
+      // Si no es opción válida, informa
+      await conn.sendMessage(m.chat, {
+        text: '*❌ Opción no válida.*\n\nEscribe "verdad" o "reto" para jugar.',
+      }, { quoted: m });
+      return;
+    }
+
+    // Responde con la opción seleccionada
+    await conn.sendMessage(m.chat, {
+      text: `*${resultado}*`,
+      footer: '¿Te atreves a seguir jugando? Escribe "verdad" o "reto" para continuar.',
+      viewOnce: true,
+    }, { quoted: m });
+
+    console.log(`✅ Verdad o Reto enviado a ${m.sender}: ${resultado}`);
+
+  } catch (error) {
+    console.error('❌ Error en Verdad o Reto:', error);
+    await conn.sendMessage(m.chat, {
+      text: '*🚨 Ha ocurrido un error, inténtalo más tarde.*',
+    }, { quoted: m });
+  }
+};
+
+handler.tags = ['fun'];
+handler.help = ['verdadoreto'];
+handler.command = ['verdadoreto', 'tor', 'vrd'];
+
+export default handler;
